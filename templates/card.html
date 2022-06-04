@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+{% block card%}
+
+<div class="w-80 my-5 d-flex justify-content-around pt-5 flex-wrap">
+
+{% if statesOne %}
+{% for notice in statesOne %}
+<div class="card bg-dark mb-3 shadow-lg overflow-hidden" style="max-width: 540px; max-height: 200px;">
+    <div class="row g-0">
+    <div class="col-md-4 overflow-hidden" >
+        <img src="{{ notice.get_image() }}" class="img-fluid rounded-start " style="max-width:300px; position:relative; left: -70px;">
+    </div>
+    <div class="col-md-8">
+        <div class="card-body text-light">
+        <h5 class="card-title ">{{ notice.get_title() }}</h5>
+        <a href="{{ url_for('info', info_id = notice.get_id()) }}"class="btn btn-light mb-3 float-end">Ler mais</a>
+        <p class="card-text"><small class="text-muted">Estado: {{ notice.get_state() }}</small></p>
+        </div>
+    </div>
+    </div>
+</div>
+{% endfor %}
+{% else%}
+{% for state in states %}
+{% for notice in state.get_news() %}
+<div class="card bg-dark mb-3 shadow-lg overflow-hidden" style="max-width: 540px; max-height: 200px;">
+    <div class="row g-0">
+    <div class="col-md-4 overflow-hidden" >
+        <img src="{{ notice.get_image() }}" class="img-fluid rounded-start " style="max-width:300px; position:relative; left: -70px;">
+    </div>
+    <div class="col-md-8">
+        <div class="card-body text-light">
+        <h5 class="card-title ">{{ notice.get_title() }}</h5>
+        <a href="{{ url_for('info', info_id = notice.get_id()) }}"class="btn btn-light mb-3 float-end">Ler mais</a>
+        <p class="card-text"><small class="text-muted">Estado: {{ notice.get_state() }}</small></p>
+        </div>
+    </div>
+    </div>
+</div>
+{% endfor %}
+{% endfor %}
+{% endif %}
+   
+</div>
+{% endblock %}

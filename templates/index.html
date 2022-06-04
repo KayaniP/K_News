@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <h3>Encontre notícias a partir do seu estado.</h3>
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Selecione o estado
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content bg-dark">
+          <div class="modal-header">
+            <h5 class="modal-title text-white" id="exampleModalLabel">Filtre as notícias pelo estado</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-decoration-none list-group">
+            {% for state in states %}
+            <a class="list-group-item  border-white bg-dark text-white "
+              href="{{ url_for('state', state_id = state.get_id()) }}">
+              <img src="{{ state.get_flag() }}" alt="" style="max-width: 40px;max-height: 30px;">
+              {{  state.get_name()}} - {{ state.get_uf()}}
+            </a>
+            {% endfor %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary">Filtrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</main>
+
+
+{% block card%}
+{% endblock %}
+
+{% endblock %}
